@@ -1,0 +1,38 @@
+pipeline:
+  name: python-test
+  identifier: pythontest
+  projectIdentifier: default_project
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.Github_OAuth_1702454246010
+        repoName: NavjitK/pyweb
+        build: <+input>
+  stages:
+    - stage:
+        name: build
+        identifier: build
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Windows
+            arch: Amd64
+          runtime:
+            type: Docker
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Run_1
+                  identifier: Run_1
+                  spec:
+                    shell: Python
+                    command: pyweb.py
+        delegateSelectors:
+          - docker-delegate
+          - windows-amd64
